@@ -6,7 +6,16 @@ import os
 
 app = Flask(__name__)
 
-model = tf.keras.models.load_model("model/Brone_model.h5")
+import gdown
+import os
+
+url = "https://drive.google.com/uc?export=download&id=1A88uwlcvt71kjkOxPNIbQ_BVJzm6ktU7"
+output = "Brone_model.h5"
+
+if not os.path.exists(output):
+    gdown.download(url, output, quiet=False)
+
+model = tf.keras.models.load_model(output)
 
 def preprocess(image):
     image = image.resize((224, 224))  # change if needed
